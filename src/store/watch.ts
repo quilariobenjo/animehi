@@ -30,7 +30,7 @@ interface InitialState {
   setServerName?: (serverName: string) => void;
   animeId?: string;
   setAnimeId?: (animeId: string) => void;
-  videoLink?: string;
+  videoLink: string;
   setVideoLink?: (link: string) => void;
   source: ISources;
   setSources: (source: ISource[]) => void;
@@ -54,15 +54,14 @@ const useWatchStore = create<InitialState>(set => ({
   setProvider: (provider: string) => set({ provider }),
   setSourceIndex: (sourceIndex: number) => set({ sourceIndex }),
   download: '',
+  videoLink: 'https://cdn.plyr.io/static/blank.mp4',
   setDownload: (download: string) => set({ download }),
   setSources: (source: ISource[]) =>
-    set(state => ({
-      sources: source,
+    set({
       videoLink:
         source?.find(src => src.quality === 'default')?.url ||
         source?.find(src => src.quality === 'auto')?.url,
-    })),
-
+    }),
   resetSources: () => {
     set({
       source: initialState,
