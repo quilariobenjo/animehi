@@ -57,8 +57,10 @@ const Header = () => {
   return (
     <header
       className={classNames(
-        'fixed top-0 left-0 z-50 h-[52px] w-full bg-gradient-to-b from-[#000000b3] to-[#00000000] transition-all md:h-[54px] 2xl:h-[58px]',
-        isNavScroll ? 'bg-[#1c1c1c]' : ''
+        'fixed top-0 left-0 z-50 h-[52px] w-full transition-all md:h-[54px] 2xl:h-[58px]',
+        isNavScroll
+          ? 'bg-[#101010]'
+          : 'bg-gradient-to-b from-[#000000b3] to-[#00000000]'
       )}
     >
       <div className="mx-auto flex h-[52px] w-full max-w-screen-2xl items-center gap-4 px-[3%] md:h-[54px] 2xl:h-[58px]">
@@ -69,7 +71,7 @@ const Header = () => {
         >
           <GiHamburgerMenu className="h-7 w-7" />
         </button>
-        <Link href="/home">
+        <Link href="/">
           <span className="z-10 flex items-center text-white">
             <div className="relative flex h-[38px] w-[32px] md:h-[33px] md:w-[37px]">
               <Image
@@ -78,11 +80,22 @@ const Header = () => {
                 src="/animehi.svg"
                 alt="Anime"
                 priority
+                sizes="(max-width: 768px) 100vw,
+                          (max-width: 1200px) 50vw,
+                          33vw"
               />
             </div>
             <span className="text-lg font-bold">NIME</span>
             <div className="relative h-[33px] w-[43px]">
-              <Image src="/h.png" alt="HI" fill priority />
+              <Image
+                src="/h.png"
+                alt="HI"
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw,
+                          (max-width: 1200px) 50vw,
+                          33vw"
+              />
             </div>
             <span className="-ml-1 text-2xl font-bold">I</span>
           </span>
