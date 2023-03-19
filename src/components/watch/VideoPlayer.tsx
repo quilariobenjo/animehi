@@ -1,3 +1,4 @@
+'use client';
 import React, { useEffect, useRef, useState } from 'react';
 import Hls from 'hls.js';
 import { APITypes, PlyrProps, usePlyr } from 'plyr-react';
@@ -40,14 +41,16 @@ const useHls = (src: string, options: Options | null) => {
 };
 const CustomPlyrInstance = React.forwardRef<
   APITypes,
-  PlyrProps & { hlsSource?: string }
+  PlyrProps & { hlsSource?: string; poster?: string }
 >((props, ref) => {
-  const { source, options = null, hlsSource } = props;
+  const { source, options = null, hlsSource, poster } = props;
   const raptorRef = usePlyr(ref, {
     ...useHls(hlsSource as string, options),
     source,
   });
-  return <video ref={raptorRef} className="plyr-react plyr" />;
+  return (
+    <video data-poster={poster} ref={raptorRef} className="plyr-react plyr" />
+  );
 });
 CustomPlyrInstance.displayName = 'CustomPlyrInstance';
 const videoOptions = {
@@ -73,9 +76,15 @@ const videoSource = null;
 
 type PlyrComponentProps = {
   src: string;
+  poster: string;
+  cover?: string;
 };
 
-const PlyrComponent: React.FC<PlyrComponentProps> = ({ src }) => {
+const PlyrComponent: React.FC<PlyrComponentProps> = ({
+  src,
+  poster,
+  cover,
+}) => {
   const ref = useRef<APITypes>(null);
   const supported = Hls.isSupported();
 
@@ -87,6 +96,7 @@ const PlyrComponent: React.FC<PlyrComponentProps> = ({ src }) => {
           options={videoOptions}
           hlsSource={`https://corsanimehi.onrender.com/${src}`}
           source={videoSource}
+          poster={poster ? `https://images.weserv.nl?url=${poster}` : cover}
         />
       ) : (
         'HLS is not supported in your browser'

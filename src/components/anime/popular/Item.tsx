@@ -1,4 +1,4 @@
-import React from 'react';
+'use client';
 import { Options } from '@popperjs/core';
 import Popup from '@/components/shared/Popup';
 import { AnimeMedia } from '@/types/types';
@@ -40,7 +40,9 @@ const ItemImage: React.FC<ItemProps> = ({ data }) => {
           <span className="relative block h-full w-full pb-[130%]">
             <Image
               fill
-              className="absolute"
+              sizes="(max-width: 768px) 100vw,
+                          (max-width: 1200px) 50vw,
+                          33vw"
               src={data.coverImage}
               alt={data.title.english}
               style={{ objectFit: 'cover' }}

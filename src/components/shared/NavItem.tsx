@@ -1,3 +1,5 @@
+'use client';
+
 import React, { SVGProps } from 'react';
 import Link, { LinkProps } from 'next/link';
 

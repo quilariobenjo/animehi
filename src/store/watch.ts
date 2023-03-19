@@ -21,6 +21,7 @@ interface ISources {
     start: number;
     end: number;
   };
+
   download?: string;
 }
 
@@ -33,7 +34,13 @@ interface InitialState {
   setVideoLink?: (link: string) => void;
   source: ISources;
   setSources: (source: ISource[]) => void;
+  sourceIndex: number;
+  setSourceIndex: (sourceIndex: number) => void;
   resetSources: () => void;
+  provider: string;
+  setProvider: (provider: string) => void;
+  download: string;
+  setDownload: (download: string) => void;
 }
 
 const initialState = {
@@ -42,10 +49,18 @@ const initialState = {
 
 const useWatchStore = create<InitialState>(set => ({
   source: initialState,
+  sourceIndex: 0,
+  provider: 'gogoanime',
+  setProvider: (provider: string) => set({ provider }),
+  setSourceIndex: (sourceIndex: number) => set({ sourceIndex }),
+  download: '',
+  setDownload: (download: string) => set({ download }),
   setSources: (source: ISource[]) =>
     set(state => ({
       sources: source,
-      videoLink: source?.find(src => src.quality === 'default')?.url,
+      videoLink:
+        source?.find(src => src.quality === 'default')?.url ||
+        source?.find(src => src.quality === 'auto')?.url,
     })),
 
   resetSources: () => {

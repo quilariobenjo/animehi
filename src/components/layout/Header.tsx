@@ -40,7 +40,7 @@ const Header = () => {
 
   useEffect(() => {
     const changeNavBackground = () => {
-      if (window.scrollY >= 80) {
+      if (window.scrollY >= 20) {
         setIsNavScroll(true);
       } else {
         setIsNavScroll(false);

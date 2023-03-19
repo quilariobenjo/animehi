@@ -14,18 +14,18 @@ const useVideoSource = ({
   episodeId: string;
   provider: string;
 }) => {
-  const fetcher = async (episodeId: string) =>
-    fetch(
-      `${CONSUMET_URL}/meta/anilist/watch${episodeId}?provider=${provider}`
-    ).then(res => res.json());
+  const fetcher = async (url: string) => fetch(url).then(res => res.json());
 
-  const { data, error } = useSWR([episodeId], fetcher, {
-    revalidateOnFocus: false,
-  });
+  const { data, error } = useSWR(
+    `${CONSUMET_URL}/meta/anilist/watch${episodeId}?provider=${provider}`,
+    fetcher,
+    {
+      revalidateOnFocus: false,
+    }
+  );
 
   return {
-    sources: data?.sources,
-    referer: data?.headers?.Referer,
+    data,
     isLoading: !error && !data,
     isError: error,
   };

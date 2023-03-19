@@ -2,6 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #1c1c1c;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #666666;
+  }
+}
+
+:root {
+  --plyr-color-main: #6a55fa;
+}
+
 .plyr--video {
   min-height: 100% !important;
 }

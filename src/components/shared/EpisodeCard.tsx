@@ -32,7 +32,7 @@ const popupOptions: Partial<Options> = {
 
 type EpisodeCardProps = {
   hasDub?: boolean;
-  data: AnimeMedia;
+  data: RecentMedia;
 };
 
 const EpisodeCard: React.FC<EpisodeCardProps> = ({ hasDub = false, data }) => {
@@ -46,7 +46,7 @@ const EpisodeCard: React.FC<EpisodeCardProps> = ({ hasDub = false, data }) => {
             </div>
             <div className="absolute bottom-0 left-0 z-20 flex w-full justify-between shadow-lg">
               <div className="rounded-tr-md bg-red-800 p-1 text-xs font-semibold text-white md:font-bold">
-                Ep {data.currentEpisode}
+                Ep {data.number}
               </div>
               <div className="rounded-tr rounded-tl-md bg-[#ffc107] p-1 text-xs font-semibold text-white md:font-bold">
                 SUB
@@ -56,25 +56,25 @@ const EpisodeCard: React.FC<EpisodeCardProps> = ({ hasDub = false, data }) => {
               <Image
                 style={{ objectFit: 'cover' }}
                 fill
-                src={data.coverImage}
-                alt={data.title.english}
+                src={data.anime.coverImage}
+                alt={data.anime.title.english}
               />
             </div>
             <Link
               className="absolute inset-0 inline-block"
-              href={`/watch/${data.anilistId}/${data.slug}/${data.currentEpisode}`}
+              href={`/watch/${data.anime.anilistId}/${data.anime.slug}/${data.number}`}
             >
               Play
             </Link>
           </div>
           <div>
             <h3
-              style={{ color: data.color }}
+              style={{ color: data.anime.color }}
               className="text-center font-semibold leading-5 text-white line-clamp-2"
             >
-              {data.title.english ||
-                data.title.userPreferred ||
-                data.title.native}
+              {data.anime.title.english ||
+                data.anime.title.userPreferred ||
+                data.anime.title.native}
             </h3>
           </div>
         </li>

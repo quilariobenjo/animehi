@@ -1,26 +1,47 @@
 'use client';
 import useVideoSource from '@/lib/hooks/useVideoSource';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import useWatchStore from '@/store/watch';
 import { EnimeSources } from '@/types/types';
-import VideoPlayer from './VideoPlayer';
-import { proxyUrl } from '@/lib/utils/proxy';
+import dynamic from 'next/dynamic';
+
+const VideoPlayer = dynamic(() => import('./VideoPlayer'), {
+  ssr: false,
+});
 
 type VideoPlayerProps = {
   episodeSources: EnimeSources[];
+  poster: string;
+  cover?: string;
 };
 
-const Video: React.FC<VideoPlayerProps> = ({ episodeSources }) => {
-  const [sourceIndex, setSourceIndex] = useState(0);
+const Video: React.FC<VideoPlayerProps> = ({
+  episodeSources,
+  poster,
+  cover,
+}) => {
+  const sourceIndex = useWatchStore(store => store.sourceIndex);
+  const provider = useWatchStore(store => store.provider);
   const [setSources, resetSources] = useWatchStore(store => [
     store.setSources,
     store.resetSources,
   ]);
+  const setDownload = useWatchStore(store => store.setDownload);
   const videoLink = useWatchStore(store => store.videoLink);
 
-  const { isLoading, isError, referer, sources } = useVideoSource({
-    episodeId: episodeSources[sourceIndex].target,
-    provider: 'gogoanime',
+  const episodeId = useMemo(
+    () =>
+      episodeSources?.[sourceIndex].target.includes('/watch')
+        ? episodeSources?.[sourceIndex].target
+            .replace('/watch', '')
+            .replace('?ep=', '$episode$')
+        : episodeSources?.[sourceIndex].target,
+    [episodeSources, sourceIndex]
+  );
+
+  const { isLoading, isError, data } = useVideoSource({
+    episodeId,
+    provider,
   });
 
   useEffect(() => {
@@ -28,12 +49,17 @@ const Video: React.FC<VideoPlayerProps> = ({ episodeSources }) => {
       resetSources();
     }
 
-    setSources(sources);
-  }, [isLoading, resetSources, setSources, sources]);
+    setDownload(data?.download);
+    setSources(data?.sources);
+  }, [isLoading, resetSources, setSources, data, setDownload]);
 
   return (
     <div className="absolute inset-0 h-full w-full bg-[#010101]">
-      <VideoPlayer src={videoLink as string} />
+      {isLoading && !videoLink ? (
+        <div className="text-2xl text-white">Loading...</div>
+      ) : (
+        <VideoPlayer poster={poster} cover={cover} src={videoLink as string} />
+      )}
     </div>
   );
 };

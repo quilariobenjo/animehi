@@ -58,7 +58,7 @@ export default function Subbed() {
       <ul className="relative grid grid-cols-3 gap-3 overflow-hidden md:grid-cols-4 lg:grid-cols-6">
         {recentRelease?.map(recentAnime => (
           <EpisodeCard
-            data={recentAnime.anime}
+            data={recentAnime}
             key={recentAnime.sources[0]?.id}
           />
         ))}

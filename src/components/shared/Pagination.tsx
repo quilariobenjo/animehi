@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { AiOutlineArrowRight, AiOutlineArrowLeft } from 'react-icons/ai';
 import Button from '@/components/shared/Button';

@@ -14,8 +14,8 @@ export interface RecentMedia {
     native: string;
     english: string;
   };
-  description: string;
   anime: AnimeMedia;
+  description: string;
   sources: Array<EpisodeSource>;
 }
 
@@ -78,6 +78,42 @@ export interface EnimeSources {
   url: string;
 }
 
+export interface EnimeEpisodes {
+  id: string;
+  number: number;
+  title: string;
+  titleVariations: {
+    native: string;
+  };
+  description: string;
+  image: string;
+  airedAt: string;
+  createdAt: string;
+  anime: EnimeAnime;
+  sources: EnimeSources[];
+}
+
+export interface EnimeAnime {
+  id: string;
+  slug: string;
+  title: Title;
+  episodes: EpisodesSource[];
+  genre: string[];
+  mappings: {
+    mal: number;
+    anidb: number;
+    kitsu: number;
+    anilist: number;
+    thetvdb: number;
+    anisearch: number;
+    livechart: number;
+    'notify.moe': string;
+    'anime-planet': string;
+  };
+  bannerImage: string;
+  coverImage: string;
+}
+
 export interface EpisodesSource {
   id: string;
   animeId: string;
@@ -95,4 +131,52 @@ export interface EpisodesSource {
     english: string;
   };
   description: string;
+}
+
+export interface Title {
+  romaji?: string;
+  english?: string;
+  native?: string;
+  userPrefered?: string;
+}
+
+export interface NextAiringEpisode {
+  airingTime: number;
+  timeUntilAiring: number;
+  episode: number;
+}
+
+export interface AniMedia {
+  id: string;
+  malId?: number;
+  title: Title;
+  synonyms?: string[];
+  isLicensed?: boolean;
+  isAdult?: boolean;
+  countryOfOrigin?: string;
+  image?: string;
+  cover?: string;
+  description?: string;
+  status: string;
+  releaseDate?: number;
+  nextAiringEpisode?: NextAiringEpisode;
+  totalEpisodes?: number;
+  currentEpisode?: number;
+  rating?: number;
+  duration?: number;
+  genres?: string[];
+  studios?: string[];
+  season?: string;
+  popularity?: number;
+  type?: string;
+  startDate?: {
+    year: number;
+    month: number;
+    day: number;
+  };
+  endDate?: {
+    year: number | null;
+    month: number | null;
+    day: number | null;
+  };
 }

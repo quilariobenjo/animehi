@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import Subbed from '@/components/anime/subbed';
 import Container from '@/components/shared/Container';

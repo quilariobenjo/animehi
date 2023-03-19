@@ -66,9 +66,15 @@ export default function Popular() {
                       <Image
                         src={popular[0]?.coverImage}
                         style={{ objectFit: 'cover' }}
-                        className="absolutes"
-                        alt={popular[0]?.title.english}
+                        alt={
+                          popular[0]?.title.english ||
+                          popular[0]?.title.userPreferred ||
+                          popular[0]?.title.romaji
+                        }
                         fill
+                        sizes="(max-width: 768px) 100vw,
+                          (max-width: 1200px) 50vw,
+                          33vw"
                       />
                     </div>
                   </div>

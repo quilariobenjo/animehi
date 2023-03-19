@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { GrSchedulePlay } from 'react-icons/gr';
 import Image from 'next/image';
@@ -5,6 +6,7 @@ import InfoItem from '@/components/shared/InfoItem';
 import Button from '@/components/shared/Button';
 import { SiAnilist, SiMyanimelist, SiKitsu } from 'react-icons/si';
 import { BiPlanet } from 'react-icons/bi';
+import { AniMedia } from '@/types/types';
 
 const LINKS = [
   {
@@ -29,31 +31,40 @@ const LINKS = [
   },
 ];
 
-const Information = () => {
+type InformationProps = {
+  data: AniMedia;
+};
+
+const Information: React.FC<InformationProps> = ({ data }) => {
   return (
     <div className="mt-2 w-full py-4">
-      <div className="mb-3 flex items-center rounded bg-[#006fe6] p-3 text-[#dddddd]">
-        <span className="text-white">
-          <GrSchedulePlay className="mr-2 h-[28px] w-[28px]" />
-        </span>
+      <div className="mb-3 flex items-center rounded bg-[#1c1c1c] py-2 px-32">
         <div>
-          <div className="text-sm">Schedule</div>
-          <span className="text-xs">
+          <div className="text-sm text-[#dddddd]">Schedule</div>
+          <span className="text-xs text-[#aaaaaa]">
             Next episode will air in 5d 10h 4m 15s
           </span>
         </div>
       </div>
-      <div className="mb-3 flex">
-        <div>
-          <div className="relative mr-2 h-[208px] min-h-[208px] w-[178px] min-w-[178px] rounded">
+      <div className="mb-3 flex flex-col md:flex-row">
+        <div className="mr-2">
+          <div className="relative h-[208px] min-h-[208px] w-[178px] min-w-[178px] rounded md:w-full md:max-w-full">
             <Image
               fill
               style={{ objectFit: 'cover' }}
-              src="https://static.bunnycdn.ru/i/cache/images/9/90/904ab6ffdcdbbaa95ed2ab749bee5104.jpg"
-              alt="anime"
+              src={data.image || data.cover || ''}
+              alt={
+                data.title.english ||
+                data.title.userPrefered ||
+                data.title.native ||
+                ''
+              }
+              sizes="(max-width: 768px) 100vw,
+                          (max-width: 1200px) 50vw,
+                          33vw"
             />
           </div>
-          <div className="mt-4 mr-2">
+          <div className="mt-4 mr-2 hidden md:block">
             <div className="mb-2 text-[#dddddd]">External Links</div>
             <div className="flex flex-col gap-1">
               {LINKS.map(link => (
@@ -71,34 +82,54 @@ const Information = () => {
           </div>
         </div>
         <div>
-          <h3 className="text-2xl text-[#dddddd]">Naruto</h3>
+          <h3 className="text-2xl text-[#dddddd]">
+            {data.title.english || data.title.userPrefered || data.title.native}
+          </h3>
           <span className="text-sm italic text-[#aaaaaa]">
-            Naruto; Naruto Shippuden
+            {data.synonyms?.map(synonym => (
+              <span key={synonym} className="text-xs text-[#aaaaaa]">
+                {synonym}{' '}
+              </span>
+            ))}
           </span>
           <div className="mb-2 text-[#dddddd]">Synopsis</div>
-
-          <p className="text-sm text-[#666666]">
-            Ayakashi are strange, supernatural creatures invisible to the
-            majority of people. Though most are harmless, some ayakashi attack
-            humans to devour their life force. Exorcist ninjas are tasked with
-            protecting people from these spiteful spirits.
-          </p>
+          <p
+            dangerouslySetInnerHTML={{ __html: data.description || '' }}
+            className="text-sm text-[#666666]"
+          />
           <div className="mt-4 grid grid-cols-2">
             <div>
-              <InfoItem type="Type" content="TV" />
-              <InfoItem type="Studios" content={<span>Toei Animation</span>} />
-              <InfoItem type="ReleaseDate" content="1999" />
-              <InfoItem type="Status" content="Ongoing" />
-              <InfoItem type="Adult" content="False" />
-              <InfoItem type="Genre" content={<span>Action</span>} />
+              <InfoItem type="Type" content={data.type} />
+              <InfoItem
+                type="Studios"
+                content={data.studios?.map(studio => (
+                  <span key={studio} className="text-xs text-primary">
+                    {studio}{' '}
+                  </span>
+                ))}
+              />
+              <InfoItem type="ReleaseDate" content={data.releaseDate} />
+              <InfoItem type="Status" content={data.status} />
+              <InfoItem type="Adult" content={`${data.isAdult}`} />
+              <InfoItem
+                type="Genre"
+                content={data.genres?.map(genre => (
+                  <span key={genre} className="text-xs text-primary">
+                    {genre}{' '}
+                  </span>
+                ))}
+              />
             </div>
             <div>
-              <InfoItem type="Country" content="Japan" />
-              <InfoItem type="Rating" content="87" />
-              <InfoItem type="Season" content="Fall" />
-              <InfoItem type="Duration" content="24 min" />
-              <InfoItem type="Episode" content="1053" />
-              <InfoItem type="Popularity" content="999999" />
+              <InfoItem type="Country" content={data.countryOfOrigin} />
+              <InfoItem type="Rating" content={data.rating} />
+              <InfoItem type="Season" content={data.season} />
+              <InfoItem
+                type="Duration"
+                content={`${data.duration || 24} min`}
+              />
+              <InfoItem type="Episode" content={data.totalEpisodes} />
+              <InfoItem type="Popularity" content={data.popularity} />
             </div>
           </div>
         </div>
