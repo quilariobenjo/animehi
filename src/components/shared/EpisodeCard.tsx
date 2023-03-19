@@ -1,15 +1,14 @@
-'use client';
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Options } from '@popperjs/core';
 import Popup from './Popup';
-import type { AnimeMedia, RecentMedia } from '@/types/types';
+import type { RecentMedia } from '@/types/types';
 import PopupInfo from './PopupInfo';
+import { BsFillPlayFill } from 'react-icons/bs';
 
 const popupOptions: Partial<Options> = {
   strategy: 'absolute',
-
   modifiers: [
     {
       name: 'sameWidth',
@@ -39,7 +38,7 @@ const EpisodeCard: React.FC<EpisodeCardProps> = ({ hasDub = false, data }) => {
   return (
     <Popup
       reference={
-        <li className="col-span-1 overflow-hidden rounded-md">
+        <>
           <div className="relative mb-2 w-full overflow-hidden rounded-md pb-[140%]">
             <div className="absolute top-0 left-0 rounded text-xs font-semibold">
               HD
@@ -52,37 +51,45 @@ const EpisodeCard: React.FC<EpisodeCardProps> = ({ hasDub = false, data }) => {
                 SUB
               </div>
             </div>
-            <div className="h-full w-full">
-              <Image
-                style={{ objectFit: 'cover' }}
-                fill
-                src={data.anime.coverImage}
-                alt={data.anime.title.english}
-              />
+            <div className="absolute h-full w-full">
+              <div className="relative h-full w-full">
+                <Image
+                  style={{ objectFit: 'cover' }}
+                  fill
+                  src={data.anime.coverImage}
+                  alt={data.anime.title.english}
+                  sizes="(max-width: 768px) 100vw,
+                          (max-width: 1200px) 50vw,
+                          33vw"
+                />
+              </div>
             </div>
             <Link
-              className="absolute inset-0 inline-block"
+              className="absolute inset-0 flex items-center justify-center bg-black/60 text-primary opacity-0 transition-opacity hover:opacity-100"
               href={`/watch/${data.anime.anilistId}/${data.anime.slug}/${data.number}`}
+              aria-label={`Play - ${
+                data.anime.title.english || data.anime.title.romaji
+              } - Episode ${data.number}`}
             >
-              Play
+              <BsFillPlayFill className="h-12 w-12" />
             </Link>
           </div>
           <div>
             <h3
               style={{ color: data.anime.color }}
-              className="text-center font-semibold leading-5 text-white line-clamp-2"
+              className="text-center text-sm font-semibold leading-5 text-white line-clamp-2 md:text-base"
             >
               {data.anime.title.english ||
                 data.anime.title.userPreferred ||
                 data.anime.title.native}
             </h3>
           </div>
-        </li>
+        </>
       }
       options={popupOptions}
-      offset={[40, -50]}
+      offset={[80, -50]}
     >
-      <PopupInfo data={data} />
+      <PopupInfo episodeNumber={data.number} data={data.anime} />
     </Popup>
   );
 };
