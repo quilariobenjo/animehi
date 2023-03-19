@@ -51,7 +51,7 @@ const Banner = () => {
                     <p className="mx-0 my-3 w-full max-w-lg pr-6 text-left text-slate-200 line-clamp-2 md:line-clamp-3">
                       {anime.description}
                     </p>
-                    <Button className="flex h-11 w-40 items-center justify-center rounded-lg bg-primary text-lg font-medium uppercase text-white shadow-xl">
+                    <Button className="flex h-10 w-32 items-center justify-center rounded-lg bg-primary text-sm font-medium uppercase text-white shadow-xl hover:bg-secondary md:h-11 md:w-40 md:text-lg">
                       <span className="mr-1">
                         <BsFillPlayFill className="h-6 w-6 text-white" />
                       </span>
