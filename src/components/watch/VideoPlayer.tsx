@@ -25,7 +25,6 @@ const useHls = (src: string, options: Options | null) => {
         options: levels.map(level => level.height),
         forced: true,
         onChange: (newQuality: number) => {
-          console.log('changes', newQuality);
           levels.forEach((level, levelIndex) => {
             if (level.height === newQuality) {
               hls.current.currentLevel = levelIndex;
@@ -36,7 +35,8 @@ const useHls = (src: string, options: Options | null) => {
       setPlyrOptions({ ...plyrOptions, quality });
       hasQuality.current = true;
     });
-  });
+  }, [plyrOptions, src]);
+
   return { options: plyrOptions };
 };
 const CustomPlyrInstance = React.forwardRef<
@@ -52,7 +52,9 @@ const CustomPlyrInstance = React.forwardRef<
     <video data-poster={poster} ref={raptorRef} className="plyr-react plyr" />
   );
 });
+
 CustomPlyrInstance.displayName = 'CustomPlyrInstance';
+
 const videoOptions = {
   autoPlay: true,
   controls: [
@@ -94,7 +96,7 @@ const PlyrComponent: React.FC<PlyrComponentProps> = ({
         <CustomPlyrInstance
           ref={ref}
           options={videoOptions}
-          hlsSource={`https://corsanimehi.onrender.com/${src}`}
+          hlsSource={`${process.env.NEXT_PUBLIC_CORS_PROXY}/${src}`}
           source={videoSource}
           poster={poster ? `https://images.weserv.nl?url=${poster}` : cover}
         />
