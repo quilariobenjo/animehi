@@ -38,7 +38,7 @@ type InformationProps = {
 const Information: React.FC<InformationProps> = ({ data }) => {
   return (
     <div className="mt-2 w-full py-4">
-      <div className="mb-3 flex items-center rounded bg-[#1c1c1c] py-2 px-32">
+      <div className="mb-3 flex items-center rounded bg-[#1c1c1c] py-2 px-4">
         <div>
           <div className="text-sm text-[#dddddd]">Schedule</div>
           <span className="text-xs text-[#aaaaaa]">
