@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #1c1c1c;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #666666;
+  }
+}
+
+:root {
+  --plyr-color-main: #6a55fa;
+}
+
+.plyr--video {
+  min-height: 100% !important;
+}
+
+#slider {
+  padding-bottom: 350px;
+}
+
+@media screen and (min-width: 768px) {
+  #slider {
+    padding-bottom: 500px;
+  }
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  display: none !important;
+}
+
+.swiper-pagination {
+  position: absolute !important;
+  display: block !important;
+  width: 8px !important;
+  bottom: auto !important;
+  top: 50% !important;
+  right: 20px !important;
+  left: auto !important;
+  transform: translateY(-50%) !important;
+  text-align: right !important;
+  z-index: 10 !important;
+}
+
+.swiper-pagination-bullet {
+  width: 8px !important;
+  height: 8px !important;
+  margin: 3px !important;
+  display: inline-block !important;
+  border-radius: 100% !important;
+  opacity: 1 !important;
+  background: #fff !important;
+  vertical-align: middle !important;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5) !important;
+}
+.swiper-pagination-bullet-active {
+  opacity: 1 !important;
+  background: #6a55fa !important;
+  margin: 0 !important;
+}
+
+#nprogress {
+  pointer-events: none !important;
+}
+
+#nprogress .bar {
+  background-color: #6a55fa !important;
+  position: fixed !important;
+  z-index: 1031 !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 3px !important;
+}
+
+#nprogress .peg {
+  display: block !important;
+  position: absolute !important;
+  right: 0px !important;
+  width: 100px !important;
+  height: 100% !important;
+  box-shadow: 0 0 10px #6a55fa, 0 0 5px #6a55fa !important;
+  opacity: 1 !important;
+  -webkit-transform: rotate(3deg) translate(0px, -4px) !important;
+  -ms-transform: rotate(3deg) translate(0px, -4px) !important;
+  transform: rotate(3deg) translate(0px, -4px) !important;
+}
+
+/* @media screen and (min-width: 768px) {
+  .swiper-pagination-bullet {
+    display: none !important;
+  }
+} */
+
+@layer base {
+  html {
+    font-family: 'Nunito', sans-serif;
+  }
+}
