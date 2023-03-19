@@ -44,7 +44,11 @@ const ItemImage: React.FC<ItemProps> = ({ data }) => {
                           (max-width: 1200px) 50vw,
                           33vw"
               src={data.coverImage}
-              alt={data.title.english}
+              alt={
+                data.title.english ||
+                data.title.romaji ||
+                data.title.userPreferred
+              }
               style={{ objectFit: 'cover' }}
             />
           </span>
@@ -53,7 +57,7 @@ const ItemImage: React.FC<ItemProps> = ({ data }) => {
       options={popupOptions}
       offset={[20, -20]}
     >
-      <PopupInfo data={data} />
+      <PopupInfo episodeNumber={1} data={data} />
     </Popup>
   );
 };

@@ -49,7 +49,7 @@ export default function Popular() {
         </div>
         <div className="">
           <div>
-            <ul>
+            <ul className="overflow-hidden rounded">
               <li className="relative w-full pt-[130px] pl-14">
                 <div>
                   <div
@@ -64,12 +64,12 @@ export default function Popular() {
                   >
                     <div className="relative h-full w-full">
                       <Image
-                        src={popular[0]?.coverImage}
+                        src={popular?.[0]?.coverImage}
                         style={{ objectFit: 'cover' }}
                         alt={
-                          popular[0]?.title.english ||
-                          popular[0]?.title.userPreferred ||
-                          popular[0]?.title.romaji
+                          popular?.[0]?.title.english ||
+                          popular?.[0]?.title.userPreferred ||
+                          popular?.[0]?.title.romaji
                         }
                         fill
                         sizes="(max-width: 768px) 100vw,
@@ -78,13 +78,17 @@ export default function Popular() {
                       />
                     </div>
                   </div>
-                  <div className="relative z-50 min-h-[60px] leading-6 text-white">
+                  <div className="relative z-50 min-h-[60px] leading-6">
                     <Link href="/">
-                      <h4 className="text-lg text-slate-200">
-                        {popular[0]?.title.english ||
-                          popular[0]?.title.userPreferred}
+                      <h4 className="text-lg text-[#dddddd] transition-colors hover:text-primary">
+                        {popular?.[0]?.title.english ||
+                          popular?.[0]?.title.userPreferred}
                       </h4>
                     </Link>
+                    <div className="flex items-center gap-1 text-sm text-[#aaaaaa]">
+                      <AiFillHeart />
+                      <span>{popular?.[0]?.popularity}</span>
+                    </div>
                   </div>
                 </div>
               </li>
@@ -103,18 +107,18 @@ export default function Popular() {
                         <Link
                           href={`/watch/${anime.anilistId}/${anime.slug}/${anime.currentEpisode}`}
                         >
-                          <h4 className="text-sm text-slate-200 transition line-clamp-2 hover:text-primary">
+                          <h4 className="text-sm text-[#dddddd] transition line-clamp-2 hover:text-primary">
                             {anime.title.english || anime.title.userPreferred}
                           </h4>
                         </Link>
                         <div className="flex items-center gap-1 text-xs">
-                          <span className="rounded bg-primary px-1 text-[#bbb]">
+                          <span className="rounded bg-primary px-1 text-[#dddddd]">
                             {anime.year}
                           </span>
-                          <span className="flex rounded bg-[#8f7003] px-1 text-[#bbb]">
+                          <span className="flex rounded bg-[#8f7003] px-1 text-[#dddddd]">
                             {anime.currentEpisode}
                           </span>
-                          <span className="rounded bg-[#666666] px-1 text-[#bbb]">
+                          <span className="rounded bg-[#666666] px-1 text-[#dddddd]">
                             {anime.format}
                           </span>
                           <span className="mx-2 inline-block h-[3px] w-[3px] rounded-full bg-[#515151]"></span>

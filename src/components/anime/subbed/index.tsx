@@ -21,16 +21,17 @@ export default function Subbed() {
   const [recentRelease, setRecentRelease] = useState<RecentMedia[] | []>([]);
   const [pageNumber, setPageNumber] = useState(1);
 
-  const fetcher = async (page: number) =>
-    fetch(`${ENIME_URL}/recent?perPage=12&page=${page}&language=JP`).then(res =>
-      res.json()
-    );
+  const fetcher = async (url: string) => fetch(url).then(res => res.json());
 
-  const { data, error } = useSWR([pageNumber, 'JP'], fetcher, {
-    revalidateOnFocus: false,
-    revalidateIfStale: false,
-    revalidateOnReconnect: false,
-  });
+  const { data, error } = useSWR(
+    `${ENIME_URL}/recent?perPage=12&page=${pageNumber}&language=JP`,
+    fetcher,
+    {
+      revalidateOnFocus: false,
+      revalidateIfStale: false,
+      revalidateOnReconnect: false,
+    }
+  );
 
   useEffect(() => {
     if (!data && !error) return;
@@ -57,10 +58,12 @@ export default function Subbed() {
       </div>
       <ul className="relative grid grid-cols-3 gap-3 overflow-hidden md:grid-cols-4 lg:grid-cols-6">
         {recentRelease?.map(recentAnime => (
-          <EpisodeCard
-            data={recentAnime}
+          <li
             key={recentAnime.sources[0]?.id}
-          />
+            className="col-span-1 overflow-hidden rounded-md"
+          >
+            <EpisodeCard data={recentAnime} />
+          </li>
         ))}
       </ul>
     </div>

@@ -12,16 +12,17 @@ const Chinese = () => {
   const [recentRelease, setRecentRelease] = useState<RecentMedia[] | []>([]);
   const [pageNumber, setPageNumber] = useState(1);
 
-  const fetcher = async (page: number) =>
-    fetch(`${ENIME_URL}/recent?perPage=12&page=${page}&language=CN`).then(res =>
-      res.json()
-    );
+  const fetcher = async (url: string) => fetch(url).then(res => res.json());
 
-  const { data, error } = useSWR([pageNumber, 'CN'], fetcher, {
-    revalidateOnFocus: false,
-    revalidateIfStale: false,
-    revalidateOnReconnect: false,
-  });
+  const { data, error } = useSWR(
+    `${ENIME_URL}/recent?perPage=12&page=${pageNumber}&language=CN`,
+    fetcher,
+    {
+      revalidateOnFocus: false,
+      revalidateIfStale: false,
+      revalidateOnReconnect: false,
+    }
+  );
 
   useEffect(() => {
     if (!data && !error) return;
@@ -30,7 +31,7 @@ const Chinese = () => {
   }, [pageNumber, error, data]);
 
   return (
-    <div className="p-0">
+    <div className="mt-8 p-0">
       <div className="flex items-center justify-between text-white">
         <div className="w-full">
           <div className="flex w-full items-center gap-2">
@@ -48,10 +49,12 @@ const Chinese = () => {
       </div>
       <ul className="relative grid grid-cols-3 gap-3 overflow-hidden md:grid-cols-4 lg:grid-cols-6">
         {recentRelease?.map(recentAnime => (
-          <EpisodeCard
-            data={recentAnime}
+          <li
             key={recentAnime.sources[0]?.id}
-          />
+            className="col-span-1 overflow-hidden rounded-md"
+          >
+            <EpisodeCard data={recentAnime} />
+          </li>
         ))}
       </ul>
     </div>
