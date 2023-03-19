@@ -75,52 +75,56 @@ const Episodes: React.FC<EpisodesProps> = ({
           </form>
         </div>
         <ul className="h-[690px] min-h-[690px] w-full overflow-y-auto overflow-x-hidden ">
-          {episodes?.map(episode => (
-            <li
-              key={episode.id}
-              className="mb-2 flex px-2 py-1 transition hover:bg-[#1c1c1c]"
-            >
-              <NextLink
-                href={`/watch/[...params]/`}
-                as={`/watch/${anilistId}/${slug}/${episode.number}`}
-                prefetch={false}
-                className="relative mr-2 h-[85px] min-h-[85px] w-[150px] min-w-[150px]"
+          {episodes
+            ?.map(episode => (
+              <li
+                key={episode.id}
+                className="mb-2 flex px-2 py-1 transition hover:bg-[#1c1c1c]"
               >
-                <Image
-                  fill
-                  style={{ objectFit: 'cover' }}
-                  src={
-                    episode.image
-                      ? `https://images.weserv.nl?url=${episode.image}`
-                      : coverImage
-                  }
-                  alt={episode.title}
-                  sizes="(max-width: 768px) 100vw,
-                          (max-width: 1200px) 50vw,
-                          33vw"
-                />
-                <div className="absolute rounded bg-[#000000bf] px-[5px] py-[4px] text-xs font-semibold text-white ">
-                  {`${duration}:00`}
-                </div>
-              </NextLink>
-              <div className="relative flex w-full flex-col justify-start">
                 <NextLink
                   href={`/watch/[...params]/`}
                   as={`/watch/${anilistId}/${slug}/${episode.number}`}
                   prefetch={false}
-                  className="text-sm text-[#dddddd] transition line-clamp-2 hover:text-primary"
+                  className="relative mr-2 h-[85px] min-h-[85px] w-[150px] min-w-[150px]"
                 >
-                  {episode.number}: {episode.title}
-                </NextLink>
-                <div className="text-xs font-medium">
-                  <div className="leading-5 text-[#aaaaaa] line-clamp-2 md:text-sm">
-                    {animeTitle}
+                  <Image
+                    fill
+                    style={{ objectFit: 'cover' }}
+                    src={
+                      episode.image
+                        ? `https://images.weserv.nl?url=${episode.image}`
+                        : coverImage
+                    }
+                    alt={episode.title}
+                    sizes="(max-width: 768px) 100vw,
+                          (max-width: 1200px) 50vw,
+                          33vw"
+                  />
+                  <div className="absolute rounded bg-[#000000bf] px-[5px] py-[4px] text-xs font-semibold text-white ">
+                    {`${duration}:00`}
                   </div>
-                  <div className="text-[#aaaaaa]">Released - 2 months ago</div>
+                </NextLink>
+                <div className="relative flex w-full flex-col justify-start">
+                  <NextLink
+                    href={`/watch/[...params]/`}
+                    as={`/watch/${anilistId}/${slug}/${episode.number}`}
+                    prefetch={false}
+                    className="text-sm text-[#dddddd] transition line-clamp-2 hover:text-primary"
+                  >
+                    {episode.number}: {episode.title}
+                  </NextLink>
+                  <div className="text-xs font-medium">
+                    <div className="leading-5 text-[#aaaaaa] line-clamp-2 md:text-sm">
+                      {animeTitle}
+                    </div>
+                    <div className="text-[#aaaaaa]">
+                      Released - 2 months ago
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </li>
-          ))}
+              </li>
+            ))
+            .reverse()}
         </ul>
       </div>
     </React.Fragment>
