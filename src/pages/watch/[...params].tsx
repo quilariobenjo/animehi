@@ -79,7 +79,10 @@ const Watch = ({
                   <Servers
                     episodeNumber={episodeNumber}
                     currentEpisodeTitle={
-                      data.title.english || data.title.romaji || ''
+                      episodes.title ||
+                      data.title.english ||
+                      data.title.romaji ||
+                      ''
                     }
                   />
                   <Information data={data} />
