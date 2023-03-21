@@ -19,48 +19,29 @@ export const LINKS = [
     href: '/home',
     name: 'Home',
     icon: AiFillHome,
-    className: 'flex gap-1 items-center hover:text-white transition text-sm',
+    className:
+      'flex gap-1 text-[#dddddd] items-center hover:text-white transition text-sm',
   },
   {
     href: '/',
     name: 'Random',
     icon: FaRandom,
-    className: 'flex gap-1 items-center hover:text-white transition text-sm',
+    className:
+      'flex gap-1 text-[#dddddd] items-center hover:text-white transition text-sm',
   },
-  {
-    href: '/watchlist',
-    name: 'Watch List',
-    icon: BsList,
-    className: 'flex gap-1 items-center hover:text-white transition text-sm',
-  },
+  // {
+  //   href: '/watchlist',
+  //   name: 'Watch List',
+  //   icon: BsList,
+  //   className: 'flex gap-1 items-center hover:text-white transition text-sm',
+  // },
 ];
 
 const Header = () => {
-  const [isNavScroll, setIsNavScroll] = useState(false);
-
-  useEffect(() => {
-    const changeNavBackground = () => {
-      if (window.scrollY >= 20) {
-        setIsNavScroll(true);
-      } else {
-        setIsNavScroll(false);
-      }
-    };
-
-    document.addEventListener('scroll', changeNavBackground);
-
-    return () => {
-      document.removeEventListener('scroll', changeNavBackground);
-    };
-  });
-
   return (
     <header
       className={classNames(
-        'fixed top-0 left-0 z-50 h-[52px] w-full transition-all md:h-[54px] 2xl:h-[58px]',
-        isNavScroll
-          ? 'bg-[#101010]'
-          : 'bg-gradient-to-b from-[#000000b3] to-[#00000000]'
+        'fixed top-0 left-0 z-[999] h-[52px] w-full bg-[#101010] transition-all md:h-[54px] 2xl:h-[58px]'
       )}
     >
       <div className="mx-auto flex h-[52px] w-full max-w-screen-2xl items-center gap-4 px-[3%] md:h-[54px] 2xl:h-[58px]">
@@ -73,7 +54,7 @@ const Header = () => {
         </button>
         <Link href="/">
           <span className="z-10 flex items-center text-white">
-            <div className="relative flex h-[38px] w-[32px] md:h-[33px] md:w-[37px]">
+            <div className="relative flex h-[38px] w-[32px] rotate-2 md:h-[33px] md:w-[37px]">
               <Image
                 // containerclassname="relative h-[58px] w-[168px] md:h-[58px] md:w-[168px] mr-2"
                 fill
@@ -85,19 +66,8 @@ const Header = () => {
                           33vw"
               />
             </div>
-            <span className="text-lg font-bold">NIME</span>
-            <div className="relative h-[33px] w-[43px]">
-              <Image
-                src="/h.png"
-                alt="HI"
-                fill
-                priority
-                sizes="(max-width: 768px) 100vw,
-                          (max-width: 1200px) 50vw,
-                          33vw"
-              />
-            </div>
-            <span className="-ml-1 text-2xl font-bold">I</span>
+            <span className="text-lg font-bold italic">NIME</span>
+            <span className="text-3xl font-bold italic">HI</span>
           </span>
         </Link>
         <div
@@ -106,16 +76,13 @@ const Header = () => {
             // isSearchOpen ? 'block' : 'hidden'
           )}
         >
-          <div
-            // ref={ref}
-            className="relative mr-0 w-full rounded-none bg-black p-2 md:rounded-lg"
-          >
+          <div className="group relative mr-0 w-full rounded-full bg-black/70 p-2 shadow-lg transition hover:bg-[#dddddd]">
             <form>
               <div className="grid grid-cols-[34px_1fr] items-center">
                 <Link href={`/search?query=`}>
                   <Button
                     type="submit"
-                    className="flex items-center justify-center text-slate-300"
+                    className="flex items-center justify-center text-[#dddddd] group-hover:text-[#101010]"
                     aria-label="submit anime search"
                   >
                     <AiOutlineSearch className="h-6 w-6" />
@@ -125,7 +92,7 @@ const Header = () => {
                   type="search"
                   // ref={searchRef}
                   placeholder="Search anime..."
-                  className="w-full bg-black text-slate-300 outline-none active:text-slate-400"
+                  className="w-full bg-black/70 text-[#8f8e8e] outline-none transition active:text-[#aaaaaa] group-hover:bg-[#dddddd]"
                   // onChange={handleInputChange}
                   // label="Search Anime"
                   // labelClassName="sr-only"
