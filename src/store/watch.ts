@@ -11,7 +11,7 @@ interface ISubtitles {
   lang: string;
 }
 
-interface ISources {
+export interface ISources {
   headers?: {
     Referer: string;
   };

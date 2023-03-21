@@ -29,19 +29,20 @@ const Controls: React.FC<ControlsProps> = ({
 }) => {
   const download = useWatchStore(store => store.download);
 
-  console.log(currentEpisodeNumber === totalEpisodes);
-  console.log(currentEpisodeNumber, totalEpisodes);
   return (
     <div className="flex justify-between bg-[#010101] px-2">
-      <a
-        href={download}
-        // rel="noreferer"
-        target="_blank"
-        className="relative flex h-[38px] items-center gap-1 px-2 text-[#aaaaaa]"
-      >
-        <BsDownload />
-        Download
-      </a>
+      {download ? (
+        <a
+          href={download}
+          // rel="noreferer"
+          target="_blank"
+          className="relative flex h-[38px] items-center gap-1 px-2 text-[#aaaaaa]"
+        >
+          <BsDownload />
+          Download
+        </a>
+      ) : null}
+
       <div className="flex space-x-1 text-[#aaaaaa]">
         {currentEpisodeNumber !== 1 && (
           <NextLink

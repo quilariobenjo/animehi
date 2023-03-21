@@ -4,7 +4,7 @@ import { CONSUMET_URL } from '@/lib/constant';
 import { useRouter } from 'next/router';
 import { AniMedia, EnimeEpisodes } from '@/types/types';
 import BreadCrump from '@/components/watch/BreadCrump';
-import Video from '@/components/watch/Video';
+// import Video from '@/components/watch/Video';
 import Controls from '@/components/watch/Controls';
 import Servers from '@/components/watch/Servers';
 import Information from '@/components/watch/Information';
@@ -12,6 +12,7 @@ import Episodes from '@/components/watch/Episodes';
 import Related from '@/components/watch/Related';
 import Layout from '@/components/layout/Layout';
 import { ENIME_URL } from '@/lib/constant';
+import OPlayer from '@/components/watch/OPlayer';
 
 const Watch = ({
   data,
@@ -58,11 +59,15 @@ const Watch = ({
               <div className="block w-full">
                 <div>
                   <div className="relative w-full overflow-hidden bg-black  pb-[56.25%]">
-                    <Video
-                      cover={data.cover}
-                      poster={currentEpisode?.image || ''}
-                      episodeSources={episodes?.sources}
-                    />
+                    <div className="absolute inset-0 h-full w-full bg-[#010101]">
+                      <OPlayer
+                        cover={data.cover || ''}
+                        malId={`${data.malId}`}
+                        poster={currentEpisode?.image || ''}
+                        sources={episodes?.sources}
+                        episodeNumber={episodeNumber}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>

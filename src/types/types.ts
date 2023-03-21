@@ -146,6 +146,19 @@ export interface NextAiringEpisode {
   episode: number;
 }
 
+export type AniSkip = {
+  statusCode: number;
+  results?: AniSkipResult[];
+};
+
+export type AniSkipResult = {
+  interval: {
+    startTime: number;
+    endTime: number;
+  };
+  type: string;
+};
+
 export interface AniMedia {
   id: string;
   malId?: number;

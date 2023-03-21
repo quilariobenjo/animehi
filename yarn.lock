@@ -158,6 +158,21 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@oplayer/core@^1.2.11":
+  version "1.2.11"
+  resolved "https://registry.yarnpkg.com/@oplayer/core/-/core-1.2.11.tgz#19c89dcea7f336ec839683adb7a89baacb8fb1c9"
+  integrity sha512-mIJisYsgOCAwXeMLQNKIz0/OIaGOkIB97Eh4rtLBSgtGS2RU+iFPGezdXX1ZO82LoVSLPBWDR+mz8rweDHlsHg==
+
+"@oplayer/hls@^1.2.8":
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/@oplayer/hls/-/hls-1.2.8.tgz#16246cf5543246ff32bd31cddfc54a9bfe1cd310"
+  integrity sha512-3kvGAIGH+Y2z64Zg02CXhcOTbSCbDbbnFSoFXqWksiyeHyJnQl1KjmtQ8XqpxF/77o6y6vxFaqFq5aqFgJYxQw==
+
+"@oplayer/ui@^1.2.17":
+  version "1.2.17"
+  resolved "https://registry.yarnpkg.com/@oplayer/ui/-/ui-1.2.17.tgz#35ca0b0e49c18fef0882f5f5e9ca10ab6fd012c1"
+  integrity sha512-Y51xBq+r0GHDQriixNvTP+rny1q2+ekTnjsIxoTvH45yGUcoCSfTH5UkyEZmuJl5unc+YGfG0mW0gQH1TmwLrg==
+
 "@pkgr/utils@^2.3.1":
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/@pkgr/utils/-/utils-2.3.1.tgz#0a9b06ffddee364d6642b3cd562ca76f55b34a03"

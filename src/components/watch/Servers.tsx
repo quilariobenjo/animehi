@@ -4,6 +4,7 @@ import Button from '../shared/Button';
 import { FiPlayCircle } from 'react-icons/fi';
 import { EnimeSources, EpisodesSource } from '@/types/types';
 import useWatchStore from '@/store/watch';
+import classNames from 'classnames';
 
 type ServersProps = {
   currentEpisodeTitle: string;
@@ -14,13 +15,7 @@ const Servers: React.FC<ServersProps> = ({
   currentEpisodeTitle,
   episodeNumber,
 }) => {
-  const setSourceIndex = useWatchStore(store => store.setSourceIndex);
-  const setProvider = useWatchStore(store => store.setProvider);
-
-  const changeProvider = (index: number, provider: string) => {
-    setSourceIndex(index);
-    setProvider(provider);
-  }
+  const provider = useWatchStore(store => store.provider);
 
   return (
     <div className="flex flex-col md:flex-row">
@@ -42,26 +37,24 @@ const Servers: React.FC<ServersProps> = ({
           <div className="flex items-center space-x-6">
             <AiFillDatabase className="text-white" />
             <div className="flex space-x-2">
-              <Button
-                // key={episodeSource.id}
-                onClick={() => changeProvider(0, 'gogoanime')}
-                type="button"
-                className="flex py-2 items-center gap-1 rounded bg-primary px-2 text-xs uppercase text-[#dddddd]"
+              <div
+                className={classNames(
+                  provider === 'gogoanime' ? 'bg-primary' : 'bg-[#1c1c1c]',
+                  'flex items-center gap-1 rounded py-2 px-2 text-xs uppercase text-[#dddddd]'
+                )}
               >
                 <FiPlayCircle />
                 GogoAnime
-              </Button>
-	{/*
-              <Button
-                // key={episodeSource.id}
-                // onClick={() => changeProvider(1, 'zoro')}
-            disabled    
-		type="button"
-                className="flex py-2 items-center gap-1 rounded bg-primary px-2 text-xs uppercase text-[#dddddd]"
+              </div>
+              <div
+                className={classNames(
+                  provider === 'zoro' ? 'bg-primary' : 'bg-[#1c1c1c]',
+                  'flex items-center gap-1 rounded py-2 px-2 text-xs uppercase text-[#dddddd]'
+                )}
               >
                 <FiPlayCircle />
                 Zoro
-              </Button> */}
+              </div>
             </div>
           </div>
         </div>
