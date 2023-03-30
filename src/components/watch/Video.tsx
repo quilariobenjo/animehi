@@ -35,4 +35,8 @@
 //   );
 // };
 
-// export default Video;
+const Video = () => {
+  return <div>...</div>;
+};
+
+export default Video;
