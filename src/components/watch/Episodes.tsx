@@ -95,7 +95,7 @@ const Episodes: React.FC<EpisodesProps> = ({
                         ? `https://images.weserv.nl?url=${episode.image}`
                         : coverImage
                     }
-                    alt={episode.title}
+                    alt={episode.title || animeTitle}
                     sizes="(max-width: 768px) 100vw,
                           (max-width: 1200px) 50vw,
                           33vw"
@@ -111,7 +111,7 @@ const Episodes: React.FC<EpisodesProps> = ({
                     prefetch={false}
                     className="text-sm text-[#dddddd] transition line-clamp-2 hover:text-primary"
                   >
-                    {episode.number}: {episode.title}
+                    {episode.number}: {episode.title || animeTitle}
                   </NextLink>
                   <div className="text-xs font-medium">
                     <div className="leading-5 text-[#aaaaaa] line-clamp-2 md:text-sm">

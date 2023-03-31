@@ -105,13 +105,7 @@ const OPlayer: React.FC<OPlayerProps> = ({
       .then(res => res.json())
       .then(res => setSource(res));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sourceIndex, episodeId]);
-
-  const zoroReferer = useMemo(
-    () => provider === 'zoro' && sources?.[sourceIndex]?.target,
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [sourceIndex]
-  );
+  }, [sourceIndex, episodeId, provider]);
 
   useEffect(() => {
     if (source) {

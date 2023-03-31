@@ -32,7 +32,7 @@ const LINKS = [
 ];
 
 type InformationProps = {
-  data: AniMedia;
+  data?: AniMedia;
 };
 
 const Information: React.FC<InformationProps> = ({ data }) => {
@@ -52,11 +52,11 @@ const Information: React.FC<InformationProps> = ({ data }) => {
             <Image
               fill
               style={{ objectFit: 'cover' }}
-              src={data.image || data.cover || ''}
+              src={data?.image || data?.cover || ''}
               alt={
-                data.title.english ||
-                data.title.userPrefered ||
-                data.title.native ||
+                data?.title.english ||
+                data?.title.userPrefered ||
+                data?.title.native ||
                 ''
               }
               sizes="(max-width: 768px) 100vw,
@@ -83,10 +83,12 @@ const Information: React.FC<InformationProps> = ({ data }) => {
         </div>
         <div>
           <h3 className="text-2xl text-[#dddddd]">
-            {data.title.english || data.title.userPrefered || data.title.native}
+            {data?.title.english ||
+              data?.title.userPrefered ||
+              data?.title.native}
           </h3>
           <span className="text-sm italic text-[#aaaaaa]">
-            {data.synonyms?.map(synonym => (
+            {data?.synonyms?.map(synonym => (
               <span key={synonym} className="text-xs text-[#aaaaaa]">
                 {synonym}{' '}
               </span>
@@ -94,26 +96,26 @@ const Information: React.FC<InformationProps> = ({ data }) => {
           </span>
           <div className="mb-2 text-[#dddddd]">Synopsis</div>
           <p
-            dangerouslySetInnerHTML={{ __html: data.description || '' }}
+            dangerouslySetInnerHTML={{ __html: data?.description || '' }}
             className="text-sm text-[#666666]"
           />
           <div className="mt-4 grid grid-cols-2">
             <div>
-              <InfoItem type="Type" content={data.type} />
+              <InfoItem type="Type" content={data?.type} />
               <InfoItem
                 type="Studios"
-                content={data.studios?.map(studio => (
+                content={data?.studios?.map(studio => (
                   <span key={studio} className="text-xs text-primary">
                     {studio}{' '}
                   </span>
                 ))}
               />
-              <InfoItem type="ReleaseDate" content={data.releaseDate} />
-              <InfoItem type="Status" content={data.status} />
-              <InfoItem type="Adult" content={`${data.isAdult}`} />
+              <InfoItem type="ReleaseDate" content={data?.releaseDate} />
+              <InfoItem type="Status" content={data?.status} />
+              <InfoItem type="Adult" content={`${data?.isAdult}`} />
               <InfoItem
                 type="Genre"
-                content={data.genres?.map(genre => (
+                content={data?.genres?.map(genre => (
                   <span key={genre} className="text-xs text-primary">
                     {genre}{' '}
                   </span>
@@ -121,15 +123,15 @@ const Information: React.FC<InformationProps> = ({ data }) => {
               />
             </div>
             <div>
-              <InfoItem type="Country" content={data.countryOfOrigin} />
-              <InfoItem type="Rating" content={data.rating} />
-              <InfoItem type="Season" content={data.season} />
+              <InfoItem type="Country" content={data?.countryOfOrigin} />
+              <InfoItem type="Rating" content={data?.rating} />
+              <InfoItem type="Season" content={data?.season} />
               <InfoItem
                 type="Duration"
-                content={`${data.duration || 24} min`}
+                content={`${data?.duration || 24} min`}
               />
-              <InfoItem type="Episode" content={data.totalEpisodes} />
-              <InfoItem type="Popularity" content={data.popularity} />
+              <InfoItem type="Episode" content={data?.totalEpisodes} />
+              <InfoItem type="Popularity" content={data?.popularity} />
             </div>
           </div>
         </div>

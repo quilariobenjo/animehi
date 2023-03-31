@@ -61,8 +61,8 @@ const Watch = ({
                   <div className="relative w-full overflow-hidden bg-black  pb-[56.25%]">
                     <div className="absolute inset-0 h-full w-full bg-[#010101]">
                       <OPlayer
-                        cover={data.cover || ''}
-                        malId={`${data.malId}`}
+                        cover={data?.cover || ''}
+                        malId={`${data?.malId}`}
                         poster={currentEpisode?.image || ''}
                         sources={episodes?.sources}
                         episodeNumber={episodeNumber}
@@ -85,8 +85,8 @@ const Watch = ({
                     episodeNumber={episodeNumber}
                     currentEpisodeTitle={
                       episodes.title ||
-                      data.title.english ||
-                      data.title.romaji ||
+                      data?.title?.english ||
+                      data?.title?.romaji ||
                       ''
                     }
                   />
@@ -101,10 +101,10 @@ const Watch = ({
                     <Episodes
                       coverImage={episodes?.anime.coverImage}
                       episodes={episodes?.anime.episodes}
-                      animeTitle={data.title.english || data.title.romaji || ''}
+                      animeTitle={data?.title?.english || data?.title?.romaji || ''}
                       anilistId={animeId}
                       slug={slug}
-                      duration={data.duration || 24}
+                      duration={data?.duration || 24}
                       totalEpisodes={data?.currentEpisode}
                     />
                   </div>
